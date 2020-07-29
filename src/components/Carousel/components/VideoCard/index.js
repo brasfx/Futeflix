@@ -7,7 +7,7 @@ function getYouTubeId(youtubeURL) {
     '$7'
   );
 }
-
+// no href estava como to, mas deu bug
 export default function VideoCard({ videoTitle, videoURL, categoryColor }) {
   const image = `https://img.youtube.com/vi/${getYouTubeId(
     videoURL
