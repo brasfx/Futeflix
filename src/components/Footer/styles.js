@@ -6,10 +6,15 @@ export const FooterBase = styled.footer`
   padding-left: 16px;
   padding-right: 16px;
   padding-top: 32px;
-  padding-bottom: 32px;
+  padding-bottom: 10px;
   color: var(--white);
   text-align: center;
+  margin-top: 50px;
   @media (max-width: 600px) {
     margin-bottom: 50px;
   }
+`;
+export const FooterDiv = styled.div`
+  display: inline-flex;
+  align-items: center;
 `;
