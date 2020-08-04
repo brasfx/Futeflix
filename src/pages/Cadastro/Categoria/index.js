@@ -1,4 +1,4 @@
-import React, { useState /*useEffect*/ } from 'react';
+import React, { useState, useEffect } from 'react';
 import PageDefault from '../../../components/PageDefault';
 import { Link } from 'react-router-dom';
 import FormField from '../../../components/FormField';
@@ -12,6 +12,17 @@ export default function CadastroCategoria() {
   };
   const [categorias, setCategorias] = useState([]);
   const [values, setValues] = useState(valoresIniciais);
+
+  useEffect(() => {
+    const URL = window.location.hostname.includes('localhost')
+      ? 'http://localhost:8080/categorias'
+      : 'https://https://futeflix-backend.herokuapp.com/categorias';
+    // E a ju ama variáveis
+    fetch(URL).then(async (respostaDoServidor) => {
+      const resposta = await respostaDoServidor.json();
+      setCategorias([...resposta]);
+    });
+  }, []);
 
   const setValue = (chave, valor) => {
     // chave: nome, descricao, bla, bli
@@ -66,7 +77,7 @@ export default function CadastroCategoria() {
 
       <ul>
         {categorias.map((categoria) => {
-          return <li key={`${categoria.nome}`}>{categoria.nome}</li>;
+          return <li key={`${categoria.titulo}`}>{categoria.titulo}</li>;
         })}
       </ul>
 
