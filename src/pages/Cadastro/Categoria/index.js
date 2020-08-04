@@ -16,7 +16,7 @@ export default function CadastroCategoria() {
   useEffect(() => {
     const URL = window.location.hostname.includes('localhost')
       ? 'http://localhost:8080/categorias'
-      : 'https://https://futeflix-backend.herokuapp.com/categorias';
+      : 'https://futeflix-backend.herokuapp.com/categorias';
     // E a ju ama variáveis
     fetch(URL).then(async (respostaDoServidor) => {
       const resposta = await respostaDoServidor.json();
