@@ -11,7 +11,7 @@ export default function Menu() {
         <img className="Logo" src={logo} alt="logo" />
       </Link>
       <Button as={Link} className="ButtonLink" to="/cadastro/video">
-        Novo vídeo
+        Adicionar vídeo
       </Button>
     </nav>
   );

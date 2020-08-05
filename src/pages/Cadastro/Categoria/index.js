@@ -1,66 +1,111 @@
 import React, { useState, useEffect } from 'react';
+import { useHistory } from 'react-router-dom';
 import PageDefault from '../../../components/PageDefault';
-import { Link } from 'react-router-dom';
 import FormField from '../../../components/FormField';
 import Button from '../../../components/Button';
+import useForm from '../../../hooks/index';
 
-export default function CadastroCategoria() {
+import categoriasRepository from '../../../repositories/categorias';
+import { TableC } from '../styles';
+
+function CadastroCategoria() {
+  const history = useHistory();
+
+  const table = {
+    width: '100%',
+    marginTop: '20px',
+    marginLeft: 'auto',
+    marginRight: 'auto',
+    paddingBottom: '10px',
+    border: '1px solid #636e72',
+  };
+
+  const tableth = {
+    paddingTop: '12px',
+    paddingBottom: '12px',
+    textAlign: 'center',
+    backgroundColor: '#fff',
+    color: 'black',
+  };
+
   const valoresIniciais = {
     nome: '',
-    descricao: '',
+    text: '',
     cor: '',
   };
+
+  const { handleChange, values } = useForm(valoresIniciais);
+
   const [categorias, setCategorias] = useState([]);
-  const [values, setValues] = useState(valoresIniciais);
 
   useEffect(() => {
-    const URL = window.location.hostname.includes('localhost')
+    const URL_TOP = window.location.hostname.includes('localhost')
       ? 'http://localhost:8080/categorias'
       : 'https://futeflix-backend.herokuapp.com/categorias';
-    // E a ju ama variáveis
-    fetch(URL).then(async (respostaDoServidor) => {
+
+    fetch(URL_TOP).then(async (respostaDoServidor) => {
       const resposta = await respostaDoServidor.json();
       setCategorias([...resposta]);
     });
   }, []);
 
-  const setValue = (chave, valor) => {
-    // chave: nome, descricao, bla, bli
-    setValues({
-      ...values,
-      [chave]: valor, // nome: 'valor'
-    });
-  };
-
-  const handleChange = (event) => {
-    setValue(event.target.getAttribute('name'), event.target.value);
-  };
-
-  const handleSubmit = (event) => {
-    event.preventDefault();
-    setCategorias([...categorias, values]);
-
-    setValues(valoresIniciais);
-  };
-  const { nome, descricao, cor } = values;
+  const listC = (
+    <table style={table}>
+      <tbody>
+        <tr>
+          <th style={tableth}>Categorias</th>
+        </tr>
+      </tbody>
+      {categorias.map((categoria) => (
+        <tbody key={`${categoria.titulo}`}>
+          <TableC fieldColor={categoria.cor}>
+            <td style={{ padding: '5px', textAlign: 'center' }}>
+              {categoria.titulo}
+            </td>
+          </TableC>
+        </tbody>
+      ))}
+    </table>
+  );
+  const { titulo, text, cor } = values;
   return (
     <PageDefault>
-      <h1>Cadastro de Categoria: {nome}</h1>
+      <h1 style={{ textAlign: 'center' }}>
+        Cadastro de Categoria
+        {values.titulo}
+      </h1>
 
-      <form onSubmit={handleSubmit}>
+      <form
+        onSubmit={function handleSubmit(infosDoEvento) {
+          infosDoEvento.preventDefault();
+
+          categoriasRepository
+            .create({
+              titulo: values.titulo,
+              cor: values.cor,
+              text: values.text,
+            })
+            .then(() => {
+              console.log('Cadastrou com sucesso!');
+              history.push('/');
+            });
+
+          setCategorias([...categorias, values]);
+        }}
+      >
         <FormField
-          label="Nome da Categoria"
+          label="Título da Categoria"
           type="text"
-          name="nome"
-          value={nome}
+          name="titulo"
+          value={titulo}
           onChange={handleChange}
         />
 
         <FormField
           label="Descrição"
           type="textarea"
-          name="descricao"
-          value={descricao}
+          name="text"
+          value={text}
           onChange={handleChange}
         />
 
@@ -75,13 +120,23 @@ export default function CadastroCategoria() {
         <Button>Cadastrar</Button>
       </form>
 
-      <ul>
-        {categorias.map((categoria) => {
-          return <li key={`${categoria.titulo}`}>{categoria.titulo}</li>;
-        })}
-      </ul>
+      {categorias.length === 0 && (
+        <div className="loading">
+          {/* Loading... */}
+          <div className="obj"></div>
+          <div className="obj"></div>
+          <div className="obj"></div>
+          <div className="obj"></div>
+          <div className="obj"></div>
+          <div className="obj"></div>
+          <div className="obj"></div>
+          <div className="obj"></div>
+        </div>
+      )}
 
-      <Link to="/">Ir para home</Link>
+      {listC}
     </PageDefault>
   );
 }
+
+export default CadastroCategoria;

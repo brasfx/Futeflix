@@ -1,6 +1,7 @@
 import styled from 'styled-components';
+import { Link } from 'react-router-dom';
 
-const Button = styled.button`
+export const StyledLink = styled(Link)`
   color: var(--black);
   border: 1px solid var(--white);
   background: var(--white);
@@ -15,7 +16,6 @@ const Button = styled.button`
   text-decoration: none;
   display: inline-block;
   transition: opacity 0.3s;
-
   &:hover,
   &:focus {
     opacity: 0.5;
@@ -23,4 +23,13 @@ const Button = styled.button`
   }
 `;
 
-export default Button;
+export const ButtonWrapper = styled.div`
+  display: flex;
+  justify-content: space-between;
+`;
+
+export const TableC = styled.tr`
+  :hover {
+    background-color: ${(props) => props.fieldColor || 'blue'};
+  }
+`;
