@@ -4,11 +4,18 @@
 
 Projeto construido durante a <a href="https://www.alura.com.br/imersao-react/" target="_blank">Imersão React da Alura</a>
 
+Tecnologias utilizadas 🚀
+
+- <a href="https://reactjs.org/" target="_blank">React</a>
+- <a href="https://reactrouter.com/">React Route</a>
+- <a href="https://react-slick.neostack.com/" target="_blank">React Slick</a>
+- <a href="https://github.com/typicode/json-server" target="_blank">JSON Server</a>
+- <a href="https://styled-components.com/" target="_blank">Styled Components</a>
+
 <strong>Como rodar o projeto?</strong><br>
-Após baixar o projeto, acesse ele via seu terminal rode os comandos:
+Após baixar o projeto, acesse ele via terminal rode os comandos:
 
-* npm install ou yarn <br>
-* npm start ou yarn start 
+- npm install ou yarn <br>
+- npm start ou yarn start
 
-
-
+<h1 align='center'>Happy Hacking!<h1>

@@ -78,19 +78,26 @@ function CadastroCategoria() {
       <form
         onSubmit={function handleSubmit(infosDoEvento) {
           infosDoEvento.preventDefault();
+          const categoriaEscolhida = categorias.find((categoria) => {
+            return categoria.titulo === values.titulo;
+          });
 
-          categoriasRepository
-            .create({
-              titulo: values.titulo,
-              cor: values.cor,
-              text: values.text,
-            })
-            .then(() => {
-              console.log('Cadastrou com sucesso!');
-              history.push('/');
-            });
-
-          setCategorias([...categorias, values]);
+          if (categoriaEscolhida) {
+            alert('Categoria já existe!');
+            return;
+          } else {
+            categoriasRepository
+              .create({
+                titulo: values.titulo,
+                cor: values.cor,
+                text: values.text,
+              })
+              .then(() => {
+                console.log('Cadastrou com sucesso!');
+                history.push('/');
+              });
+            setCategorias([...categorias, values]);
+          }
         }}
       >
         <FormField

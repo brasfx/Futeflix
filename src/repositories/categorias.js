@@ -43,8 +43,26 @@ function create(objetoDaCategoria) {
   });
 }
 
+function edit({ titulo }) {
+  return fetch(`${URL_CATEGORIES}`, {
+    method: 'PUT',
+    headers: {
+      'Content-type': 'application/json',
+    },
+    body: JSON.stringify(titulo),
+  }).then(async (respostaDoServidor) => {
+    if (respostaDoServidor.ok) {
+      const resposta = await respostaDoServidor.json();
+      return resposta;
+    }
+
+    throw new Error('Não foi possível cadastrar os dados :(');
+  });
+}
+
 export default {
   getAllWithVideos,
   getAll,
   create,
+  edit,
 };

@@ -29,7 +29,7 @@ export default function CadastroVideo() {
 
   return (
     <PageDefault>
-      <h1>Cadastro de Video</h1>
+      <h1 style={{ textAlign: 'center' }}>Cadastro de Video</h1>
 
       <form
         onSubmit={(event) => {
