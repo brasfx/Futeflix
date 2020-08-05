@@ -18,4 +18,4 @@ Após baixar o projeto, acesse ele via terminal rode os comandos:
 - npm install ou yarn <br>
 - npm start ou yarn start
 
-<h1 align='center'>Happy Hacking!<h1>
+<h1 align='center'>Happy Hacking!<h1><img align="center" width="200px" src="https://user-images.githubusercontent.com/22081873/88965749-945da280-d281-11ea-9d7c-f374e0beffce.png">
